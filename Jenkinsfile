@@ -30,8 +30,8 @@ pipeline {
 
   }
   environment {
-    ECR_ID = '142198642907'
+    ECR_ID = '142198642907.dkr.ecr.ap-southeast-1.amazonaws.com'
     CALCULATION_SERVICE_IMAGE = 'rekhav2-casestudy-calculation-service'
-    ECR_CREDENTIALS = 'credentials(\'ecr-credentials\')'
+    ECR_CREDENTIALS = credentials('ecr-credentials')
   }
 }
