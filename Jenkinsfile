@@ -25,6 +25,21 @@ pipeline {
           }
         }
 
+        stage('Prepare Validation Response Daemon') {
+          steps {
+            dir(path: 'source/creditcard-identity-verification-response-daemon') {
+              sh 'pwd'
+              sh 'docker build -t $VALIDATION_RESPONSE_DAEMON_IMAGE:latest -t $VALIDATION_RESPONSE_DAEMON_IMAGE:$BUILD_NUMBER .'
+              sh 'docker tag $VALIDATION_RESPONSE_DAEMON_IMAGE:latest $ECR_ID/$VALIDATION_RESPONSE_DAEMON_IMAGE:latest'
+              sh 'docker login --username $ECR_CREDENTIALS_USR --password $ECR_CREDENTIALS_PSW $ECR_ID'
+              sh 'docker image prune -f'
+              sh 'docker push $ECR_ID/$VALIDATION_RESPONSE_DAEMON_IMAGE:latest'
+              sh 'docker logout'
+            }
+
+          }
+        }
+
       }
     }
 
@@ -33,5 +48,6 @@ pipeline {
     ECR_ID = '142198642907.dkr.ecr.ap-southeast-1.amazonaws.com'
     CALCULATION_SERVICE_IMAGE = 'rekhav2-casestudy-calculation-service'
     ECR_CREDENTIALS = credentials('ecr-credentials')
+    VALIDATION_RESPONSE_DAEMON_IMAGE = 'rekhav2-identity-verification-response-daemon'
   }
 }
