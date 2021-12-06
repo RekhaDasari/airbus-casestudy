@@ -91,10 +91,11 @@ pipeline {
   }
   environment {
     ECR_ID = '142198642907.dkr.ecr.ap-southeast-1.amazonaws.com'
-    CALCULATION_SERVICE_IMAGE = 'creditcard-service'
+    CALCULATION_SERVICE_IMAGE = 'rekhav2-casestudy-calculation-service'
     ECR_CREDENTIALS = credentials('ecr-credentials')
     VALIDATION_RESPONSE_DAEMON_IMAGE = 'rekhav2-identity-verification-response-daemon'
     EMAIL_SERVICE_IMAGE = 'rekhav2-email-service'
     IDENTITY_VERIFICATION_SERVICE_IMAGE = 'rekhav2-identity-verification-service'
+    CREDITCARD_SERVICE_IMAGE = 'rekhav2-creditcard-service'
   }
 }
